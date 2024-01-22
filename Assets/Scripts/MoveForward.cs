@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveForvard : MonoBehaviour
+public class MoveForward : MonoBehaviour
 {
 	[SerializeField] private bool _isLocalForvard;
 

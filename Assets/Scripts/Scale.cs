@@ -8,6 +8,6 @@ public class Scale : MonoBehaviour
 
 	private void Update()
 	{
-		transform.localScale += new Vector3(1, 1, 1) * _scaleGrowSpeed * Time.deltaTime;
+		transform.localScale += Vector3.one * _scaleGrowSpeed * Time.deltaTime;
 	}
 }
