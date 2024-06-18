@@ -1,10 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Counter : MonoBehaviour
 {
@@ -12,6 +9,7 @@ public class Counter : MonoBehaviour
 	[SerializeField] private int _stepValue;
 
 	private TextMeshProUGUI _text;
+	private Coroutine _run;
 	private bool _isWork = false;
 	private int _currentValue;
 
@@ -22,6 +20,7 @@ public class Counter : MonoBehaviour
 	private void Start()
 	{
 		_text = GetComponent<TextMeshProUGUI>();
+		_run = StartCoroutine(ChangeValue());
 		_text.text = "0";
 	}
 
@@ -30,10 +29,17 @@ public class Counter : MonoBehaviour
 		if (_isWork == false)
 		{
 			_isWork = true;
-			StartCoroutine(ChangeValue());
+			_run = StartCoroutine(ChangeValue());
 		}
 		else
+		{
 			_isWork = false;
+
+			if (_run != null)
+			{
+				StopCoroutine(_run);
+			}
+		}
 
 		StatusChanged.Invoke();
 	}
