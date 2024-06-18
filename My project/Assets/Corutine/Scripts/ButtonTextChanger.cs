@@ -27,9 +27,9 @@ public class ButtonTextChanger : MonoBehaviour
 		_counter.StatusChanged -= ChangeText;
 	}
 
-	private void ChangeText()
+	private void ChangeText(bool isWork)
 	{
-		if (_counter.IsWork)
+		if (isWork)
 			_currentText.text = TextStop;
 		else
 			_currentText.text = TextStart;

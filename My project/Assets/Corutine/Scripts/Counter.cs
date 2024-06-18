@@ -13,9 +13,7 @@ public class Counter : MonoBehaviour
 	private bool _isWork = false;
 	private int _currentValue;
 
-	public event Action StatusChanged;
-
-	public bool IsWork => _isWork;
+	public event Action<bool> StatusChanged;
 
 	private void Start()
 	{
@@ -41,7 +39,7 @@ public class Counter : MonoBehaviour
 			}
 		}
 
-		StatusChanged.Invoke();
+		StatusChanged?.Invoke(_isWork);
 	}
 
 	private IEnumerator ChangeValue()
