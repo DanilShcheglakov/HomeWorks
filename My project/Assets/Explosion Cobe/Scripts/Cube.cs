@@ -1,23 +1,33 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Renderer))]
 public class Cube : MonoBehaviour
 {
-	[SerializeField] Spowner _spowner;
+	[SerializeField] Spawner _spawner;
 	[SerializeField] int _divisonChance;
 	[SerializeField] private float _explosionForce;
 	[SerializeField] private float _explosionRadius;
 
-	private int _divisionChaceDivider =2;
-	private int _scaleDdivider =2;
+	private int _divisionChaceDivider = 2;
+	private int _scaleDdivider = 2;
 
-	public float ExplosionForce=> _explosionForce;
-	public float ExplosionRadius=> _explosionRadius;
+	public float ExplosionForce => _explosionForce;
+	public float ExplosionRadius => _explosionRadius;
 
 	private void OnMouseDown()
 	{
 		Explode();
 		Destroy(gameObject);
+	}
+
+	public void SetNewState()
+	{
+		transform.localScale /= _divisionChaceDivider;
+		_divisonChance /= _scaleDdivider;
+
+		GetComponent<Renderer>().material.color = new(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
+		;
 	}
 
 	private void Explode()
@@ -27,13 +37,6 @@ public class Cube : MonoBehaviour
 		if (divisionChanse > _divisonChance)
 			return;
 
-		_spowner.Divide(gameObject.GetComponent<Cube>());
+		_spawner.Divide(this);
 	}
-
-	public void SetNewState()
-	{
-		transform.localScale /= _divisionChaceDivider;
-		_divisonChance /= _scaleDdivider;
-		gameObject.GetComponent<Renderer>().material.color = new(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
-;	}
 }
