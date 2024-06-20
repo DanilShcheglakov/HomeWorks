@@ -22,8 +22,6 @@ public class Spawner : MonoBehaviour
 	{
 		Cube copy;
 
-		cube.TryGetComponent<Rigidbody>(out Rigidbody findingRigidBodyy);
-
 		Vector3 newPosition = cube.transform.position;
 
 		int shards = Random.Range(_minCubesCopies, _maxCubesCopies);
@@ -33,8 +31,8 @@ public class Spawner : MonoBehaviour
 			copy = Instantiate(cube, newPosition, Quaternion.identity);
 			copy.SetNewState();
 
-			if (findingRigidBodyy != null)
-				copy.GetComponent<Rigidbody>().AddExplosionForce(cube.ExplosionForce, cube.transform.position, cube.ExplosionRadius);
+			if (copy.TryGetComponent<Rigidbody>(out Rigidbody findingRigidBodyy))
+				findingRigidBodyy.AddExplosionForce(cube.ExplosionForce, cube.transform.position, cube.ExplosionRadius);
 		}
 	}
 }

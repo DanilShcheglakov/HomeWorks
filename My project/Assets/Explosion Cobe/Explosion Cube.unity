@@ -467,6 +467,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 617676166}
     - target: {fileID: 276563782932309577, guid: f9201ab180d68da4ab62d6ed55ce5c72, type: 3}
+      propertyPath: _explosionForce
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 276563782932309577, guid: f9201ab180d68da4ab62d6ed55ce5c72, type: 3}
       propertyPath: _maxCubesCopies
       value: 6
       objectReference: {fileID: 0}
