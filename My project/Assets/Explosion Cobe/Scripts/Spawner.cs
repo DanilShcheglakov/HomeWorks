@@ -5,13 +5,6 @@ public class Spawner : MonoBehaviour
 	[SerializeField, Min(0)] private int _minCubesCopies;
 	[SerializeField] private int _maxCubesCopies;
 
-	private Rigidbody _rbOfNewObject;
-
-	private void Start()
-	{
-		_rbOfNewObject = GetComponent<Rigidbody>();
-	}
-
 	private void OnValidate()
 	{
 		if (_maxCubesCopies <= _minCubesCopies)

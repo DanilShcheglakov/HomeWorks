@@ -4,8 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(Renderer))]
 public class Cube : MonoBehaviour
 {
-	[SerializeField] Spawner _spawner;
-	[SerializeField] int _divisonChance;
+	[SerializeField] private Spawner _spawner;
+	[SerializeField] private int _divisonChance;
 	[SerializeField] private float _explosionForce;
 	[SerializeField] private float _explosionRadius;
 
@@ -27,7 +27,6 @@ public class Cube : MonoBehaviour
 		_divisonChance /= _scaleDdivider;
 
 		GetComponent<Renderer>().material.color = new(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
-		;
 	}
 
 	private void Explode()
