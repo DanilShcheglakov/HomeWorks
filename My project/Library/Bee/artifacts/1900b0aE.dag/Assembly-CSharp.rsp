@@ -360,6 +360,7 @@
 "Assets/Corutine/Scripts/ButtonTextChanger.cs"
 "Assets/Corutine/Scripts/Counter.cs"
 "Assets/Explosion Cobe/Scripts/Cube.cs"
+"Assets/Explosion Cobe/Scripts/Explode.cs"
 "Assets/Explosion Cobe/Scripts/Spawner.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01_UGUI.cs"
