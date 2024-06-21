@@ -1,8 +1,9 @@
-using System;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+	[SerializeField] Explode _exploder;
+
 	[SerializeField, Min(0)] private int _minCubesCopies;
 	[SerializeField] private int _maxCubesCopies;
 
@@ -24,6 +25,8 @@ public class Spawner : MonoBehaviour
 		{
 			copy = Instantiate(cube, newPosition, Quaternion.identity);
 			copy.SetNewState();
+
+			_exploder.Run(copy, cube.transform.position);
 		}
 	}
 }
