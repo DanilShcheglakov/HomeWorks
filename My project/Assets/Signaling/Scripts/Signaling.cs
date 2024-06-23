@@ -5,7 +5,6 @@ using UnityEngine;
 public class Signaling : MonoBehaviour
 {
 	[SerializeField] private ProtectedArea _protectedArea;
-	[SerializeField] private float _deltaTimeForChangeVolume;
 	[SerializeField] private float _deltaVolume;
 
 	private Coroutine _volumeUp;
@@ -54,11 +53,11 @@ public class Signaling : MonoBehaviour
 
 	private IEnumerator UpVolume()
 	{
-		var delay = new WaitForSeconds(_deltaTimeForChangeVolume);
+		var delay = new WaitForFixedUpdate();
 
 		while (_volume < 1)
 		{
-			_volume = Mathf.MoveTowards(_volume, 1, _deltaVolume);
+			_volume = Mathf.MoveTowards(_volume, 1, _deltaVolume * Time.fixedDeltaTime);
 			_audioSource.volume = _volume;
 			yield return delay;
 		}
@@ -66,11 +65,11 @@ public class Signaling : MonoBehaviour
 
 	private IEnumerator DownVolume()
 	{
-		var delay = new WaitForSeconds(_deltaTimeForChangeVolume);
+		var delay = new WaitForFixedUpdate();
 
 		while (_volume > 0)
 		{
-			_volume = Mathf.MoveTowards(_volume, 0, _deltaVolume);
+			_volume = Mathf.MoveTowards(_volume, 0, _deltaVolume * Time.fixedDeltaTime);
 			_audioSource.volume = _volume;
 			yield return delay;
 		}

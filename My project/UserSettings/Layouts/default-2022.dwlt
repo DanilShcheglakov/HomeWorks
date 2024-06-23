@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 350}
   m_MaxSize: {x: 10000, y: 10000}
@@ -868,9 +868,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1.2872548, y: 1.8119, z: 2.5415964}
+    m_Target: {x: -0.47323215, y: 1.3328977, z: -2.3260326}
     speed: 2
-    m_Value: {x: 1.2872548, y: 1.8119, z: 2.5415964}
+    m_Value: {x: -0.47323215, y: 1.3328977, z: -2.3260326}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -916,13 +916,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.0048555518, y: 0.9852661, z: -0.16862045, w: 0.028379483}
+    m_Target: {x: 0.00017063282, y: 0.9953999, z: -0.09585287, w: 0.0017875395}
     speed: 2
-    m_Value: {x: 0.004855525, y: 0.98526067, z: -0.16861953, w: 0.028379327}
+    m_Value: {x: 0.0001706318, y: 0.99539393, z: -0.09585229, w: 0.0017875287}
   m_Size:
-    m_Target: 8.232917
+    m_Target: 14.4340925
     speed: 2
-    m_Value: 8.232917
+    m_Value: 14.4340925
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1088,8 +1088,8 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
+      m_SelectedIDs: 045b0000
+      m_LastClickedID: 23300
       m_ExpandedIDs: 2cfbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -1175,8 +1175,8 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 156}
-    m_SelectedIDs: 785d0000
-    m_LastClickedID: 23928
+    m_SelectedIDs: 605d0000
+    m_LastClickedID: 23904
     m_ExpandedIDs: 000000003a5d00003c5d00003e5d0000405d0000425d0000445d0000465d0000485d00004a5d00005e5d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1365,7 +1365,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -175832
+  m_LastSelectedObjectID: 23300
 --- !u!114 &22
 MonoBehaviour:
   m_ObjectHideFlags: 52

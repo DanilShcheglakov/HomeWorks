@@ -3053,8 +3053,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _protectedArea: {fileID: 2003435279}
-  _deltaTimeForChangeVolume: 0.1
-  _deltaVolume: 0.025
+  _deltaVolume: 0.1
 --- !u!4 &1534022133
 Transform:
   m_ObjectHideFlags: 0
