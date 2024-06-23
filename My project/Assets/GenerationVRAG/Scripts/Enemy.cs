@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -6,8 +7,8 @@ using Random = UnityEngine.Random;
 public class Enemy : MonoBehaviour
 {
 	[SerializeField] private float _speed;
-	private float _maxRotation = 361f;
 	private Rigidbody _rigidbody;
+	private Transform _target;
 
 	public event Action<Enemy> CameOut;
 
@@ -18,21 +19,22 @@ public class Enemy : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		transform.Translate(Vector3.forward*_speed*Time.fixedDeltaTime, Space.Self);
+		transform.position = Vector3.MoveTowards(transform.position, _target.position, _speed * Time.fixedDeltaTime);
 	}
 
-	public void SetStartSettings(Transform startPosition)
+	public void SetStartSettings(Transform startPosition, Transform target)
 	{
 		transform.position = startPosition.position;
-		transform.Rotate(Vector3.up*Random.Range(0, _maxRotation));
+		_target = target;
+		transform.LookAt(_target);
 
 		gameObject.SetActive(true);
 		_rigidbody.velocity = Vector3.zero;
 	}
 
-	private void OnTriggerExit(Collider other)
+	private void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.TryGetComponent<SafeZone>(out SafeZone _))		
+		if (other.gameObject.TryGetComponent<Target>(out Target _))
 			CameOut.Invoke(this);
 	}
 }
