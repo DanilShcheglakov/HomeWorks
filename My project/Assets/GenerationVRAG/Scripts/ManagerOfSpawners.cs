@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ManagerOfSpawners : MonoBehaviour
 {
-	[SerializeField] GameObject AllPoints;
+	[SerializeField] private GameObject AllPoints;
 
 	[SerializeField] private float _reapitingRate = 2f;
 

@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/GenerationVRAG/Generation.unity
+- path: Assets/Signaling/Signaling.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
