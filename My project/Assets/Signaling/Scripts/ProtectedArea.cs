@@ -3,18 +3,18 @@ using UnityEngine;
 
 public class ProtectedArea : MonoBehaviour
 {
-	public event Action StrangerCome;
-	public event Action StrangerExit;
+	public event Action<bool> StrangerCome;
+	public event Action<bool> StrangerExit;
 
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.TryGetComponent<Player>(out Player _))
-			StrangerCome?.Invoke();
+			StrangerCome?.Invoke(true);
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
 		if (other.gameObject.TryGetComponent<Player>(out Player _))
-			StrangerExit?.Invoke();
+			StrangerExit?.Invoke(false);
 	}
 }

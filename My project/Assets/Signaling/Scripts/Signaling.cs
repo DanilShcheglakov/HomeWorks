@@ -7,11 +7,12 @@ public class Signaling : MonoBehaviour
 	[SerializeField] private ProtectedArea _protectedArea;
 	[SerializeField] private float _deltaVolume;
 
-	private Coroutine _volumeUp;
-	private Coroutine _volumeDowm;
+	private Coroutine _changeVolume;
 
 	private AudioSource _audioSource;
 	private float _volume = 0f;
+	private float _maxVolume = 1f;
+	private float _minVolume = 0f;
 
 	private void Start()
 	{
@@ -21,59 +22,51 @@ public class Signaling : MonoBehaviour
 
 	private void OnEnable()
 	{
-		_protectedArea.StrangerCome += StartAlarm;
-		_protectedArea.StrangerExit += StopAlarm;
+		_protectedArea.StrangerCome += ChangeAlarmSettings;
+		_protectedArea.StrangerExit += ChangeAlarmSettings;
 	}
 
 	private void OnDisable()
 	{
-		_protectedArea.StrangerCome -= StartAlarm;
-		_protectedArea.StrangerExit -= StopAlarm;
+		_protectedArea.StrangerCome -= ChangeAlarmSettings;
+		_protectedArea.StrangerExit -= ChangeAlarmSettings;
 	}
 
-	private void StartAlarm()
+	private void ChangeAlarmSettings(bool isCrookInside)
 	{
-		if (_volumeDowm != null)
-			StopCoroutine(_volumeDowm);
+		float targetVolume;
 
-		if (_audioSource.isPlaying == false)
-			_audioSource.Play();
+		if (isCrookInside)
+		{
+			if (_audioSource.isPlaying == false)
+				_audioSource.Play();
 
-		_volumeUp = StartCoroutine(UpVolume());
+			targetVolume = _maxVolume;
+		}
+		else
+		{
+			targetVolume = _minVolume;
+		}
 
+		if (_changeVolume != null)
+			StopCoroutine(_changeVolume);
+
+		_changeVolume = StartCoroutine(ChangeVolume(targetVolume));
 	}
 
-	private void StopAlarm()
-	{
-		if (_volumeUp != null)
-			StopCoroutine(_volumeUp);
-
-		_volumeDowm = StartCoroutine(DownVolume());
-	}
-
-	private IEnumerator UpVolume()
+	private IEnumerator ChangeVolume(float targetVolume)
 	{
 		var delay = new WaitForFixedUpdate();
 
-		while (_volume < 1)
+		while (_volume <= 1 && _volume >= 0)
 		{
-			_volume = Mathf.MoveTowards(_volume, 1, _deltaVolume * Time.fixedDeltaTime);
+			_volume = Mathf.MoveTowards(_volume, targetVolume, _deltaVolume * Time.fixedDeltaTime);
 			_audioSource.volume = _volume;
-			yield return delay;
-		}
-	}
 
-	private IEnumerator DownVolume()
-	{
-		var delay = new WaitForFixedUpdate();
-
-		while (_volume > 0)
-		{
-			_volume = Mathf.MoveTowards(_volume, 0, _deltaVolume * Time.fixedDeltaTime);
-			_audioSource.volume = _volume;
 			yield return delay;
 		}
 
-		_audioSource.Stop();
+		if (_audioSource.isPlaying && _volume == _minVolume)
+			_audioSource.Stop();
 	}
 }
