@@ -22,43 +22,41 @@ public class Signaling : MonoBehaviour
 
 	private void OnEnable()
 	{
-		_protectedArea.StrangerCome += ChangeAlarmSettings;
-		_protectedArea.StrangerExit += ChangeAlarmSettings;
+		_protectedArea.StrangerCome += StartAlarm;
+		_protectedArea.StrangerExit += StopAlarm;
 	}
 
 	private void OnDisable()
 	{
-		_protectedArea.StrangerCome -= ChangeAlarmSettings;
-		_protectedArea.StrangerExit -= ChangeAlarmSettings;
+		_protectedArea.StrangerCome -= StartAlarm;
+		_protectedArea.StrangerExit -= StopAlarm;
 	}
 
-	private void ChangeAlarmSettings(bool isCrookInside)
+	private void StartAlarm()
 	{
-		float targetVolume;
-
-		if (isCrookInside)
-		{
-			if (_audioSource.isPlaying == false)
-				_audioSource.Play();
-
-			targetVolume = _maxVolume;
-		}
-		else
-		{
-			targetVolume = _minVolume;
-		}
-
 		if (_changeVolume != null)
 			StopCoroutine(_changeVolume);
 
-		_changeVolume = StartCoroutine(ChangeVolume(targetVolume));
+		if (_audioSource.isPlaying == false)
+			_audioSource.Play();
+
+		_changeVolume = StartCoroutine(ChangeVolume(_maxVolume));
+
+	}
+
+	private void StopAlarm()
+	{
+		if (_changeVolume != null)
+			StopCoroutine(_changeVolume);
+
+		_changeVolume = StartCoroutine(ChangeVolume(_minVolume));
 	}
 
 	private IEnumerator ChangeVolume(float targetVolume)
 	{
 		var delay = new WaitForFixedUpdate();
 
-		while (_volume <= 1 && _volume >= 0)
+		while (_volume != targetVolume)
 		{
 			_volume = Mathf.MoveTowards(_volume, targetVolume, _deltaVolume * Time.fixedDeltaTime);
 			_audioSource.volume = _volume;
